@@ -26,10 +26,24 @@ class Channel:
         self.video_count = int(item['statistics']['videoCount'])
         self.view_count = int(item['statistics']['viewCount'])
 
-        # метод get_service возвращает объект для работы с YouTube API
-        @staticmethod
-        def get_service():
-            return googleapiclient.discovery.build('youtube', 'v3', developerKey="AIzaSyBTN9KzMhMCpC1S15uq6O9O7-xLv45AwgI")
+    # метод get_service возвращает объект для работы с YouTube API
+    @staticmethod
+    def get_service():
+        return googleapiclient.discovery.build('youtube', 'v3', developerKey="AIzaSyBTN9KzMhMCpC1S15uq6O9O7-xLv45AwgI")
+
+    # метод to_json сохраняет в файл значения атрибутов экземпляра Channel
+    def to_json(self, filename):
+        data = {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description,
+            "url": self.url,
+            "subscriber_count": self.subscriber_count,
+            "video_count": self.video_count,
+            "view_count": self.view_count
+        }
+        with open(filename, 'w') as file:
+            json.dump(data, file)
 
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
