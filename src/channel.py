@@ -1,5 +1,6 @@
 import requests
 import json
+import googleapiclient.discovery
 
 class Channel:
     """Класс для ютуб-канала"""
@@ -9,6 +10,22 @@ class Channel:
         self.channel_id = channel_id
         self.api_key = "AIzaSyBTN9KzMhMCpC1S15uq6O9O7-xLv45AwgI"
 
+        # выполняем запрос к YouTube API
+        service = Channel.get_service()
+        response = service.channels().list(
+            part='snippet,statistics',
+            id=channel_id
+        ).execute()
+
+        # заполняем атрибуты объекта данными из ответа
+        item = response['items'][0]
+        self.id = item['id']
+        self.title = item['snippet']['title']
+        self.description = item['snippet']['description']
+        self.url = f"https://www.youtube.com/channel/{self.channel_id}"
+        self.subscriber_count = int(item['statistics']['subscriberCount'])
+        self.video_count = int(item['statistics']['videoCount'])
+        self.view_count = int(item['statistics']['viewCount'])
 
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
