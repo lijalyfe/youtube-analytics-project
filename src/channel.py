@@ -16,7 +16,6 @@ class Channel:
             part='snippet,statistics',
             id=channel_id
         ).execute()
-
         # заполняем атрибуты объекта данными из ответа
         item = response['items'][0]
         self.id = item['id']
@@ -26,6 +25,11 @@ class Channel:
         self.subscriber_count = int(item['statistics']['subscriberCount'])
         self.video_count = int(item['statistics']['videoCount'])
         self.view_count = int(item['statistics']['viewCount'])
+
+        # метод get_service возвращает объект для работы с YouTube API
+        @staticmethod
+        def get_service():
+            return googleapiclient.discovery.build('youtube', 'v3', developerKey="AIzaSyBTN9KzMhMCpC1S15uq6O9O7-xLv45AwgI")
 
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
