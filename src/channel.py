@@ -1,4 +1,5 @@
 import requests
+import json
 
 class Channel:
     """Класс для ютуб-канала"""
@@ -11,4 +12,8 @@ class Channel:
 
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
-        pass
+        url = f'https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id={self.channel_id}&key={self.api_key}'
+        response = requests.get(url)
+        data = json.loads(response.text)
+        print(json.dumps(data, indent=2))
+
