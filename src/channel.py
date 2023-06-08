@@ -36,6 +36,12 @@ class Channel:
             return self.subscriber_count + other.subscriber_count
         raise ValueError
 
+    #метод __sub__реализует вычитание количества подписчиков
+    def __sub__(self, other):
+        if isinstance(other, Channel):
+            return self.subscriber_count - other.subscriber_count
+        raise ValueError
+
 
     # метод get_service возвращает объект для работы с YouTube API
     @staticmethod
