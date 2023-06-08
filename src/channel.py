@@ -42,7 +42,7 @@ class Channel:
             return self.subscriber_count - other.subscriber_count
         raise ValueError
 
-    # метод __eq__ реализует сравнение количества подписчиков
+    # методы __eq__, __lt__, реализуют сравнение количества подписчиков
     def __eq__(self, other):
         if isinstance(other, Channel):
             return self.subscriber_count == other.subscriber_count
@@ -52,6 +52,12 @@ class Channel:
     def __lt__(self, other):
         if isinstance(other, Channel):
             return self.subscriber_count < other.subscriber_count
+        raise ValueError
+
+
+    def __gt__(self, other):
+        if isinstance(other, Channel):
+            return self.subscriber_count > other.subscriber_count
         raise ValueError
 
 
