@@ -26,9 +26,15 @@ class Channel:
         self.video_count = int(item['statistics']['videoCount'])
         self.view_count = int(item['statistics']['viewCount'])
 
-
+    # метод __str__ возвращает название и ссылку на канал
     def __str__(self):
         return f"{self.title} ({self.url})"
+
+    # метод __add__ реализует сложение количества подписчиков
+    def __add__(self, other):
+        if isinstance(other, Channel):
+            return self.subscriber_count + other.subscriber_count
+        raise ValueError
 
 
     # метод get_service возвращает объект для работы с YouTube API
