@@ -29,9 +29,13 @@ class Video:
             print(f"An error occurred: {e}")
 
 
+    def __str__(self):
+        return self.title
+
+
 class PLVideo(Video):
-    def __init__(self, id, title, url, views, likes, playlist_id):
-        super().__init__(id, title, url, views, likes)
+    def __init__(self, id, playlist_id):
+        super().__init__(id)
         self.playlist_id = playlist_id
 
 
