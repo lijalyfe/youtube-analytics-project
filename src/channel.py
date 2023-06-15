@@ -34,44 +34,43 @@ class Channel:
     def __add__(self, other):
         if isinstance(other, Channel):
             return self.subscriber_count + other.subscriber_count
-        raise ValueError
+        raise ValueError(f"Нельзя сложить экземпляр класса {self.subscriber_count} с экземпляром класса {other.subscriber_count}")
 
     #метод __sub__реализует вычитание количества подписчиков
     def __sub__(self, other):
         if isinstance(other, Channel):
             return self.subscriber_count - other.subscriber_count
-        raise ValueError
+        raise ValueError(f"Нельзя вычесть из экземпляра класса {self.subscriber_count} экземпляр класса {other.subscriber_count}")
 
-    # методы __eq__, __lt__, __gt__, __le__,  реализуют сравнение количества подписчиков
+    # методы __eq__, __lt__, __gt__, __le__, __ge__ реализуют сравнение количества подписчиков
     def __eq__(self, other):
         if isinstance(other, Channel):
             return self.subscriber_count == other.subscriber_count
-        raise ValueError
+        raise ValueError(f"Нельзя сравнить экземпляр класса {self.subscriber_count} с экземпляром класса {other.subscriber_count}")
 
 
     def __lt__(self, other):
         if isinstance(other, Channel):
             return self.subscriber_count < other.subscriber_count
-        raise ValueError
+        raise ValueError(f"Нельзя сравнить экземпляр класса {self.subscriber_count} с экземпляром класса {other.subscriber_count}")
 
 
     def __gt__(self, other):
         if isinstance(other, Channel):
             return self.subscriber_count > other.subscriber_count
-        raise ValueError
+        raise ValueError(f"Нельзя сравнить экземпляр класса {self.subscriber_count} с экземпляром класса {other.subscriber_count}")
 
 
     def __le__(self, other):
         if isinstance(other, Channel):
             return self.subscriber_count <= other.subscriber_count
-        raise ValueError
+        raise ValueError(f"Нельзя сравнить экземпляр класса {self.subscriber_count} с экземпляром класса {other.subscriber_count}")
 
 
     def __ge__(self, other):
         if isinstance(other, Channel):
             return self.subscriber_count >= other.subscriber_count
-        raise ValueError
-
+        raise ValueError(f"Нельзя сравнить экземпляр класса {self.subscriber_count} с экземпляром класса {other.subscriber_count}")
 
 
     # метод get_service возвращает объект для работы с YouTube API
