@@ -40,26 +40,3 @@ class PlayList:
     def show_best_video(self):
         best_video = max(self.videos, key=lambda x: x.likes)
         return best_video.url
-
-    def fetch_videos(self):
-        nextpagetoken = None
-        while True:
-            plitems_res = self.youtube.playlistItems().list(
-                playlistId=self.playlist_id,
-                part='contentDetails',
-                maxResults=50,
-                pageToken=nextpagetoken
-            ).execute()
-            video_ids = [x['contentDetails']['videoId'] for x in plitems_res['items']]
-            videos_res = self.youtube.videos().list(
-                part='contentDetails,snippet,statistics',
-                id=','.join(video_ids)
-            ).execute()
-            for video_res in videos_res['items']:
-                self.videos.append(PLVideo(video_res['id'], video_res['snippet']['title'],
-                                           video_res['contentDetails']['duration'],
-                                           int(video_res['statistics']['likeCount']),
-                                           f"https://www.youtube.com/watch?v={video_res['id']}"))
-            nextpagetoken = plitems_res.get('nextPageToken')
-            if not nextpagetoken:
-                break
